@@ -96,9 +96,9 @@ class observer {
             $roleid = 5; // Student.
         }
 
-        // enrol_user() sends the per-course branded welcome itself (synchronously) when the manual
-        // instance has a send option (customint1) + message (customtext1) — which we've configured
-        // per target course to explain the unlock. No explicit send needed (it would double up).
+        // Note: enrol_user() sends the per-course branded welcome itself (synchronously) when the
+        // manual instance has a send option (customint1) + message (customtext1) - which we have
+        // configured per target course. No explicit send needed (it would double up).
         $plugin = enrol_get_plugin('manual');
         $plugin->enrol_user($instance, $userid, $roleid);
     }

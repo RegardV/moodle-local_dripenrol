@@ -22,11 +22,11 @@
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Drip enrolment';
-$string['enabled'] = 'Enabled';
-$string['enabled_desc'] = 'Automatically enrol a student into the next course when they complete the previous one.';
 $string['chain'] = 'Course chain';
 $string['chain_desc'] = 'One mapping per line as <code>triggercourseid=targetcourseid</code>. When the trigger course is completed, the student is enrolled into the target course via its manual enrolment method. Example: <code>2=3</code> enrols into course 3 when course 2 is completed.';
+$string['enabled'] = 'Enabled';
+$string['enabled_desc'] = 'Automatically enrol a student into the next course when they complete the previous one.';
+$string['pluginname'] = 'Drip enrolment';
+$string['privacy:metadata'] = 'The Drip enrolment plugin does not store any personal data; it acts on course-completion events to create enrolments.';
 $string['roleid'] = 'Role id';
 $string['roleid_desc'] = 'Role to assign on auto-enrolment (5 = Student).';
-$string['privacy:metadata'] = 'The Drip enrolment plugin does not store any personal data; it acts on course-completion events to create enrolments.';

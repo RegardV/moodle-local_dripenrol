@@ -30,7 +30,6 @@ namespace local_dripenrol;
  * @covers \local_dripenrol\observer
  */
 final class observer_test extends \advanced_testcase {
-
     /**
      * Build a course_completed event for a user finishing a course.
      *
@@ -103,8 +102,10 @@ final class observer_test extends \advanced_testcase {
         observer::course_completed($event);
 
         $instance = $DB->get_record('enrol', ['courseid' => $target->id, 'enrol' => 'manual']);
-        $this->assertEquals(1, $DB->count_records('user_enrolments',
-            ['enrolid' => $instance->id, 'userid' => $user->id]));
+        $this->assertEquals(1, $DB->count_records(
+            'user_enrolments',
+            ['enrolid' => $instance->id, 'userid' => $user->id]
+        ));
     }
 
     /**
