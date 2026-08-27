@@ -24,8 +24,6 @@
 
 namespace local_dripenrol;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Drip enrolment: when a student completes a "trigger" course, enrol them into the
  * configured "target" course via the target's manual enrolment method. Idempotent.
@@ -35,8 +33,11 @@ defined('MOODLE_INTERNAL') || die();
  * @package local_dripenrol
  */
 class observer {
-
-    /** @return array map of triggercourseid => targetcourseid, parsed from the 'chain' setting. */
+    /**
+     * Parse the configured course chain.
+     *
+     * @return array map of triggercourseid => targetcourseid, from the 'chain' setting
+     */
     public static function chain(): array {
         $raw = (string) get_config('local_dripenrol', 'chain');
         $map = [];
@@ -45,7 +46,7 @@ class observer {
             if ($line === '' || strpos($line, '=') === false) {
                 continue;
             }
-            list($from, $to) = array_map('trim', explode('=', $line, 2));
+            [$from, $to] = array_map('trim', explode('=', $line, 2));
             if (ctype_digit($from) && ctype_digit($to)) {
                 $map[(int) $from] = (int) $to;
             }
@@ -79,18 +80,20 @@ class observer {
 
         $context = \context_course::instance($target);
         if (is_enrolled($context, $userid)) {
-            return; // already enrolled — nothing to do (idempotent on re-aggregation).
+            return; // Already enrolled - nothing to do (idempotent on re-aggregation).
         }
 
         // Enrol via the target course's enabled manual enrolment method.
-        $instance = $DB->get_record('enrol',
-            ['courseid' => $target, 'enrol' => 'manual', 'status' => ENROL_INSTANCE_ENABLED]);
+        $instance = $DB->get_record(
+            'enrol',
+            ['courseid' => $target, 'enrol' => 'manual', 'status' => ENROL_INSTANCE_ENABLED]
+        );
         if (!$instance) {
-            return; // no manual enrol method available on the target.
+            return; // No manual enrolment method available on the target.
         }
         $roleid = (int) get_config('local_dripenrol', 'roleid');
         if (!$roleid) {
-            $roleid = 5; // student
+            $roleid = 5; // Student.
         }
 
         // enrol_user() sends the per-course branded welcome itself (synchronously) when the manual
