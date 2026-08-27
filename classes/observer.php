@@ -53,7 +53,12 @@ class observer {
         return $map;
     }
 
-    /** Enrol the user into the next course when they complete the current one. */
+    /**
+     * Enrol the user into the next course when they complete the current one.
+     *
+     * @param \core\event\course_completed $event the completion event
+     * @return void
+     */
     public static function course_completed(\core\event\course_completed $event): void {
         global $DB, $CFG;
         require_once($CFG->libdir . '/enrollib.php');

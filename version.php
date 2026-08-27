@@ -27,6 +27,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_dripenrol';
 $plugin->version   = 2026062900;
-$plugin->requires  = 2024041600;   // Moodle 4.4+ (instance runs 5.2)
+$plugin->requires  = 2024041600;   // Moodle 4.4 or later.
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->release   = '1.0';

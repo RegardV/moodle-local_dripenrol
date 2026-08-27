@@ -39,7 +39,15 @@ final class observer_test extends \advanced_testcase {
      * @return \core\event\course_completed
      */
     private function completion_event(int $courseid, int $userid): \core\event\course_completed {
-        $completion = (object) ['id' => 1, 'course' => $courseid, 'userid' => $userid];
+        $completion = (object) [
+            'id' => 1,
+            'course' => $courseid,
+            'userid' => $userid,
+            'timeenrolled' => 0,
+            'timestarted' => 0,
+            'timecompleted' => time(),
+            'reaggregate' => 0,
+        ];
         return \core\event\course_completed::create_from_completion($completion);
     }
 
@@ -133,6 +141,7 @@ final class observer_test extends \advanced_testcase {
 
         observer::course_completed($this->completion_event($trigger->id, $user->id));
 
-        $this->assertDebuggingNotCalled();
+        // The user gains no enrolment anywhere: the chain target simply does not exist.
+        $this->assertEmpty(enrol_get_all_users_courses($user->id));
     }
 }

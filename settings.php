@@ -21,21 +21,38 @@
  * @copyright  2026 InkyPyrus
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
 
 if ($hassiteconfig) {
     $settings = new admin_settingpage('local_dripenrol', get_string('pluginname', 'local_dripenrol'));
 
-    $settings->add(new admin_setting_configcheckbox('local_dripenrol/enabled',
-        get_string('enabled', 'local_dripenrol'), get_string('enabled_desc', 'local_dripenrol'), 1));
+    $settings->add(
+        new admin_setting_configcheckbox(
+            'local_dripenrol/enabled',
+            get_string('enabled', 'local_dripenrol'),
+            get_string('enabled_desc', 'local_dripenrol'),
+            1
+        )
+    );
 
-    $settings->add(new admin_setting_configtextarea('local_dripenrol/chain',
-        get_string('chain', 'local_dripenrol'), get_string('chain_desc', 'local_dripenrol'),
-        "2=3\n3=4\n4=5"));
+    $settings->add(
+        new admin_setting_configtextarea(
+            'local_dripenrol/chain',
+            get_string('chain', 'local_dripenrol'),
+            get_string('chain_desc', 'local_dripenrol'),
+            "2=3\n3=4\n4=5"
+        )
+    );
 
-    $settings->add(new admin_setting_configtext('local_dripenrol/roleid',
-        get_string('roleid', 'local_dripenrol'), get_string('roleid_desc', 'local_dripenrol'), 5, PARAM_INT));
+    $settings->add(
+        new admin_setting_configtext(
+            'local_dripenrol/roleid',
+            get_string('roleid', 'local_dripenrol'),
+            get_string('roleid_desc', 'local_dripenrol'),
+            5,
+            PARAM_INT
+        )
+    );
 
     $ADMIN->add('localplugins', $settings);
 }
