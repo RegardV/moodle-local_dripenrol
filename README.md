@@ -4,7 +4,6 @@ Automatically enrols a student into the next course in a sequence when they comp
 the current one — turning a set of standalone courses into a gated learning path
 without a paid course-sequencing plugin.
 
-[![Moodle Plugin CI](https://github.com/RegardV/moodle-local_dripenrol/actions/workflows/ci.yml/badge.svg)](https://github.com/RegardV/moodle-local_dripenrol/actions/workflows/ci.yml)
 
 ## How it works
 
